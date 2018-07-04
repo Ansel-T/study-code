@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>绚丽小球</title>
+    <style>
+        canvas{
+            background: #000;
+        }
+    </style>
+</head>
+<body>
+    <canvas id = "canvas" width="1000" height="600" >请升级当前浏览器</canvas>
+    <script src="js/underscore.js"></script>
+<script>
+    //1.获取画布
+    const canvas = document.querySelector('#canvas');
+    const ctx = canvas.getContext("2d");
+    //创建小球类
+    class Ball {
+        constructor(x,y,color){
+            this.x = x;
+            this.y = y ;
+            this.color = color;
+            this.r = 40;
+        }
+        /**
+         * 绘制小球
+         */
+        render(){
+            ctx.save();
+            ctx.beginPath();
+            ctx.arc(this.x,this.y,this.r,0,Math.PI * 2);
+            ctx.fillStyle = this.color;
+            ctx.fill();
+            ctx.restore();
+        }
+    }
+    let ball = new Ball(50,50,'orange');
+    ball.render();
+</script>
+</body>
+</html>
