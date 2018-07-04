@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>绚丽小球</title>
     <style>
+        body{
+            margin: 0 200px ;
+        }
         canvas{
             background: #000;
         }
@@ -18,7 +21,7 @@
     //1.获取画布
     const canvas = document.querySelector('#canvas');
     const ctx = canvas.getContext("2d");
-    //创建小球类
+    //2.创建小球类
     class Ball {
         constructor(x,y,color){
             this.x = x;
@@ -38,8 +41,30 @@
             ctx.restore();
         }
     }
-    let ball = new Ball(50,50,'orange');
-    ball.render();
+    //3.会移动小球类
+    class MoveBall extends Ball {
+        constructor(x,y,color){
+            super(x,y,color);
+            //量的变化
+            this.dx = _.random(-5,5 )
+            this.dy = _.random(-5,5);
+            this.dr = _.random(1,3);
+        }
+        update(){
+            this.x += this.dx;
+            this.y += this.dy;
+            this.r -= this.dr;
+            if(this.r < 0){
+                this.r = 0;
+            }
+        }
+    }
+
+    //4.实例化小球
+    let ballArray = [];
+    let colorArray = ['red','pink','orange','blue','green','purple'];
+
+    //5.监听鼠标移动
 </script>
 </body>
 </html>
