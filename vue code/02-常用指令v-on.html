@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-on</title>
+</head>
+<body>
+<div id="app">
+    <!-- <button v-on:click = "num += 1">add+1</button> -->
+    <p :style = "{color:fontColor}"> {{msg}}</p>
+    <button @click = " msg = 'hi Jim'">改变内容</button>
+    <button @click = 'changeContent'>改变字体颜色</button>
+    <div @click = "ParentHint">
+        parent
+        <button @click.stop ="hint">son</button>
+    </div>
+    <a @click.prevent = "link" href="https://www.baidu.com">点我不跳转</a>
+    <button @keyup.enter = "onEnter">enter</button>
+</div>
+<script src="js/vue.js"></script>
+<script>
+    const vm = new Vue({
+        el:'#app',
+        data:{
+            msg:'hello word !',
+            fontColor:'orange',
+            num:0,
+            colorArr:['orange','pink','green','blue','red','black']
+        },
+        methods:{
+            changeContent(){
+                // this.msg = "我点了你一下颜色就改变了";
+                this.fontColor = this.colorArr[this.random(0,5)]
+            },
+            random(min,max){
+                if(max == null){
+                    max = min ;
+                    min = 0;
+                }
+                return min + Math.floor(Math.random() * (max - min + 1));
+            },
+            hint(){
+                alert('son');
+            },
+            ParentHint(){
+                alert('parent');
+            },
+            link(){
+                alert('不跳转')
+            },
+            onEnter(e){
+                console.log(e);
+                alert(e.keyCode);
+            }
+
+        }
+    })
+</script>
+</body>
+</html>
