@@ -8,7 +8,8 @@
 </head>
 <body>
 <div id="app">
-    <!-- <button v-on:click = "num += 1">add+1</button> -->
+     <button v-on:click = "num += 1">add+1</button>
+     <p>{{num}}</p>
     <p :style = "{color:fontColor}"> {{msg}}</p>
     <button @click = " msg = 'hi Jim'">改变内容</button>
     <button @click = 'changeContent'>改变字体颜色</button>
