@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>父子组件</title>
+</head>
+<body>
+<div id="app">
+    <parent></parent>
+    <tmp></tmp>
+</div>
+
+<div id="app1">
+    <tmp1></tmp1>
+</div>
+
+<template id = 'tmp'>
+    <div>
+        <h2>template</h2>
+        <input type="date">
+         <p>{{message}}</p>
+    </div>
+</template>
+
+<template id = 'tmp1'>
+    <div>
+        <h2>template11 </h2>
+        <input type="date">
+    </div>
+</template>
+<script src="js/vue.js"></script>
+<script>
+
+    let child1 = Vue.extend({
+        template:`
+            <div>我是一个子组件</div>
+        `
+    })
+
+    Vue.component('parent',{
+        template:`
+            <div>
+                <my-child1></my-child1>
+            </div>
+        `,
+        components:{
+            'my-child1':child1
+        }
+    })
+    Vue.component('tmp',{
+        template:'#tmp',
+        data:function(){
+            return {
+                message:'msg'
+            }
+        }
+    })
+
+    new Vue({
+        el:'#app',
+        components:{
+        }
+    })
+
+    new Vue({
+        el:'#app1',
+        components:{
+            'tmp1':{
+                template:'#tmp1'
+            }
+        }
+    })
+</script>
+</body>
+</html>

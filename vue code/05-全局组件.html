@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>全局组件</title>
+</head>
+<body>
+<div id="app">
+    <my-date></my-date>
+    <profile></profile>
+</div>
+<div id="app1">
+    <p>app1</p>
+    <my-date></my-date>
+    <!--  <color-profile></color-profile>  -->
+</div>
+<div id="app2">
+    <p>局部App2</p>
+   <color-profile></color-profile>
+   <profile></profile>
+</div>
+<script src="js/vue.js"></script>
+<script>
+    //创建组件构造器
+    var dateProfile = Vue.extend({
+        template:`
+            <div>
+                <input type = 'date'>
+                <p>今天星期几</p>
+            </div>
+        `
+    })
+    //注册一个全局的组件
+    Vue.component('my-date',dateProfile);
+    Vue.component('profile',{
+        template:'<h2>第二个全局组件</h2>'
+    })
+    const vm = new Vue({
+        el:'#app',
+        data:{
+        },
+        methods:{
+        }
+    })
+    new Vue({
+        el:'#app1'
+    })
+
+    new Vue({
+        el:'#app2',
+        components:{
+            'color-profile':{
+                template:`
+                    <div>
+                        <input type = "color">
+                        <p>color</p>
+                    </div>
+                `
+            }
+        }
+    })
+</script>
+</body>
+</html>
