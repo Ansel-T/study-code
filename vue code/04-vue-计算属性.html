@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>demo</title>
+</head>
+<body>
+<div id="app">
+    <p>{{fullName}}</p>
+    <button @click = 'deal()'>点点看</button>
+</div>
+<script src="js/vue.js"></script>
+<script>
+    const vm = new Vue({
+        el:'#app',
+        data:{
+            frist:'zhang',
+            last:'san'
+        },
+        methods:{
+            deal(){
+                this.fullName = "li si"
+            }
+        },
+        //计算属性在页面渲染（不是刷新页面）的时候，计算属性不会产生变化，适用于较大量的计算且改变的频率较低的属性，有缓存
+        computed:{
+            /* fullName(){
+                return this.frist + " " +this.last;
+            } */
+            fullName:{
+                get(){
+                    return this.frist + " " +this.last;
+                },
+                set(str){
+                    let nameArr = str.split(' ');
+                    this.frist = nameArr[0];
+                    this.last = nameArr[1];
+                }
+            }
+        }
+    })
+</script>
+</body>
+</html>

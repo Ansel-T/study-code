@@ -82,6 +82,23 @@
         console.log(i++)
     },50);
 
+    //typeof 返回值有六种可能： "number", "string","boolean","object","function"和 "undefined"，而Array,Null,Date,RegExp等特殊对象使用typeof一律返回object
+
+    //Object.prototype.toString 方法判断数据类型
+    console.log(Object.prototype.toString.call("jerry"));//[object String]
+    console.log(Object.prototype.toString.call(12));//[object Number]
+    console.log(Object.prototype.toString.call(true));//[object Boolean]
+    console.log(Object.prototype.toString.call(undefined));//[object Undefined]
+    console.log(Object.prototype.toString.call(null));//[object Null]
+    console.log(Object.prototype.toString.call({name: "jerry"}));//[object Object]
+    console.log(Object.prototype.toString.call(function(){}));//[object Function]
+    console.log(Object.prototype.toString.call([]));//[object Array]
+    console.log(Object.prototype.toString.call(new Date));//[object Date]
+    console.log(Object.prototype.toString.call(/\d/));//[object RegExp]
+    function Person(){};
+    console.log(Object.prototype.toString.call(new Person));//[object Object]
+
+
 </script>
 </body>
 </html>
