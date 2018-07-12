@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>组件通信</title>
+</head>
+<body>
+    <div id="app">
+        <parent :title = 'title' :url = 'url'></parent>
+    </div>
+
+    <template id = 'parent'>
+        <div>
+            <child1 :title = 'title'></child1>
+            <child2 :url = 'url'></child2>
+        </div>
+    </template>
+
+    <template id = 'title'>
+        <h2>{{title}}</h2>
+    </template>
+
+    <template id = 'pic'>
+        <img :src="url" alt="">
+    </template>
+<script src="./js/vue.js"></script>
+<script>
+
+    let child1 = Vue.extend({
+        template:'#title',
+        props:['title']
+    })
+
+    let child2 = Vue.extend({
+        template:'#pic',
+        props:['url']
+    });
+
+    Vue.component('parent',{
+        template:'#parent',
+        components:{
+            child1,
+            child2
+        },
+        props:['title','url']
+    })
+
+    new Vue({
+        el:'#app',
+        data:{
+            title:'小人物，大故事',
+            url:'img/img_01.jpg'
+        },
+    })
+</script>
+</body>
+</html>
