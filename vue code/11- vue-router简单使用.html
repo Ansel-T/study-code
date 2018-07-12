@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-router</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <style lang="">
+        body{
+            background: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div class="row">
+        <div class="col-xs-8 col-xs-offset-2">
+            <h2>web 前端</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-2 col-xs-offset-2">
+            <div class="list-group">
+                  <!-- <router-link class = 'list-group-item' to="/html">html</router-link> -->
+                  <router-link class = 'list-group-item' :to="{name:'html'}">html</router-link>
+                 <router-link class = 'list-group-item' to="/css">css</router-link>
+                 <router-link class = 'list-group-item' to="/js">js</router-link>
+            </div>
+            </div>
+            <div class="col-xs-6">
+                <div class="panel">
+                    <div class="panel-body">
+                        <router-view></router-view>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<template id = 'html'>
+    <div>
+        <p>我是html</p>
+        <div>
+            <u class="nav nav-tabs">
+                <router-link to="/html/ul">ul标签介绍</router-link>
+                <router-link to="/html/table">table标签介绍</router-link>
+            </ul>
+            <div class="tab-content">
+                <router-view></router-view>
+            </div>
+        </div>
+    </div>
+</template>
+
+<template id = 'css'>
+    <div>
+        <p>我是css </p>
+    </div>
+</template>
+
+<template id = 'js'>
+    <div>
+        <p>我是javascript</p>
+    </div>
+</template>
+
+<template id = 'ul'>
+    <div>
+        <p>我是ul标签...</p>
+    </div>
+</template>
+
+<template id = 'table'>
+    <div>
+        <p>我是table标签...</p>
+    </div>
+</template>
+
+<script src="js/vue.js"></script>
+<script src="js/vue-router.js"></script>
+
+<script>
+
+    //1.定义路由组件
+    const html = Vue.extend({
+        template:'#html'
+    });
+    const css = Vue.extend({
+        template:'#css'
+    });
+    const js = Vue.extend({
+        template:'#js'
+    });
+
+    const ul = Vue.extend({
+        template:'#ul'
+    })
+
+    const table = Vue.extend({
+        template:'#table'
+    })
+
+    //2.定义路由
+    const routes = [
+        {path:'/',redirect:'html'},
+        {
+            path:'/html',
+            name:'html',
+            component:html,
+            children:[
+                {path:'ul',component:ul},
+                {path:'table',component:table},
+                {path:'/',redirect:'ul'},
+            ]
+        },
+        {path:'/css',component:css},
+        {path:'/js',component:js}
+    ];
+    //3.创建router 实例
+    const router = new VueRouter({
+        routes
+    });
+
+    //4.创建和挂载
+    const app = new Vue({
+        router
+    }).$mount('#app');
+</script>
+</body>
+</html>

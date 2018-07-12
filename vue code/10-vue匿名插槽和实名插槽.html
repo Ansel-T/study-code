@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>10-vue匿名插槽和实名插槽</title>
+</head>
+<body>
+<div id="app">
+    <my-slot>
+        <img src="img/img_01.jpg" alt="">
+    </my-slot>
+</div>
+
+<div id="my-computer">
+    <my-computer>
+        <div>
+            <p name = 'cpu'>Intel Core i7 8700K</p>
+            <p name = 'memory'>芝奇 幻光戟16*2 </p>
+            <p name = 'video-card'>四路Titan抱回家</p>
+        </div>
+    </my-computer>
+</div>
+
+<template id = 'my-slot'>
+    <div>
+        <slot>我是默认的，如果有就会被替换掉</slot>
+    </div>
+</template>
+
+<template id = 'computer'>
+    <div class= main>
+        <slot name = 'cpu'>我是cpu</slot>
+        <slot name = 'memory'>我是内存条</slot>
+        <slot name = 'video-card'>我是显卡呀</slot>
+    </div>
+</template>
+
+<script src="js/vue.js"></script>
+<script>
+
+    Vue.component('my-slot',{
+        template:'#my-slot',
+    })
+
+    Vue.component('my-computer',{
+        template:'#my-computer'
+    })
+
+    new Vue({
+        el:'#app'
+    })
+
+</script>
+</body>
+</html>
