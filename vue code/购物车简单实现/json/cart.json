@@ -1,0 +1,14 @@
+{
+    "allShops":{
+        "totalMoney":0,
+        "listShop":[
+            {
+                "id":"1001",
+                "name":"",
+                "imgUrl":"",
+                "price":2300.00,
+                "shopNum":1
+            }
+        ]
+    }
+}
