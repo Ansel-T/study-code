@@ -4,9 +4,23 @@
         "listShop":[
             {
                 "id":"1001",
-                "name":"",
-                "imgUrl":"",
+                "name":"Apple iPad 平板电脑 2018年新款9.7英寸",
+                "imgUrl":"css/img/ipad.jpg",
                 "price":2300.00,
+                "shopNum":1
+            },
+            {
+                "id":"1002",
+                "name":"Apple iPhone 8 Plus 64GB 红色特别版",
+                "imgUrl":"css/img/apple_red.jpg",
+                "price":5799.00,
+                "shopNum":1
+            },
+            {
+                "id":"1003",
+                "name":"雷柏（Rapoo） MT700 多模式办公机械键盘",
+                "imgUrl":"css/img/rappo.jpg",
+                "price":349.00,
                 "shopNum":1
             }
         ]

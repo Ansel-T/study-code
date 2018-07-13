@@ -1,0 +1,123 @@
+.cart-header h2 {
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  font-size: 18px;
+  border-bottom: 1px solid #e0e0e0; }
+
+.shop-main .shop-name {
+  height: 40px;
+  line-height: 40px;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 0 10px; }
+  .shop-main .shop-name a {
+    font-size: 18px;
+    color: #232323; }
+  .shop-main .shop-name .fr {
+    font-size: 14px;
+    color: red; }
+.shop-main .product-list {
+  padding: 0 10px; }
+  .shop-main .product-list .list-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0; }
+    .shop-main .product-list .list-item .shop-detile-left {
+      padding-left: 25px;
+      width: 75px;
+      height: 75px;
+      position: relative; }
+      .shop-main .product-list .list-item .shop-detile-left .icon_select {
+        position: absolute;
+        left: 0;
+        top: 30px;
+        width: 15px;
+        height: 15px;
+        border: 2px solid #ccc;
+        border-radius: 50%; }
+      .shop-main .product-list .list-item .shop-detile-left .selected {
+        background: #e4393c;
+        border-color: #e4393c; }
+      .shop-main .product-list .list-item .shop-detile-left img {
+        width: 75px; }
+    .shop-main .product-list .list-item .shop-detile-right {
+      width: 250px; }
+      .shop-main .product-list .list-item .shop-detile-right .name {
+        margin-bottom: 10px; }
+        .shop-main .product-list .list-item .shop-detile-right .name span {
+          font-size: 14px;
+          line-height: 20px;
+          font-weight: 700; }
+      .shop-main .product-list .list-item .shop-detile-right .goods_line {
+        position: relative; }
+        .shop-main .product-list .list-item .shop-detile-right .goods_line p, .shop-main .product-list .list-item .shop-detile-right .goods_line .num_and_more {
+          display: inline-block; }
+        .shop-main .product-list .list-item .shop-detile-right .goods_line p {
+          color: red;
+          height: 30px;
+          line-height: 30px; }
+        .shop-main .product-list .list-item .shop-detile-right .goods_line .num_and_more {
+          text-align: center;
+          font-size: 1px;
+          position: absolute;
+          right: 0; }
+          .shop-main .product-list .list-item .shop-detile-right .goods_line .num_and_more span {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            line-height: 30px;
+            background: #e0e0e0;
+            font-size: 18px;
+            vertical-align: middle; }
+          .shop-main .product-list .list-item .shop-detile-right .goods_line .num_and_more input {
+            width: 45px;
+            height: 30px;
+            line-height: 30px;
+            background: #e0e0e0;
+            -webkit-appearance: none;
+            border: none;
+            text-align: center;
+            padding: 0;
+            vertical-align: middle; }
+.shop-main .fixBar {
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  height: 50px;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0; }
+  .shop-main .fixBar .fl {
+    line-height: 50px;
+    color: #232323;
+    position: relative; }
+    .shop-main .fixBar .fl .icon_select {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      border: 2px solid #ccc;
+      border-radius: 50%;
+      position: absolute;
+      top: 14px;
+      left: 10px; }
+    .shop-main .fixBar .fl .selected {
+      background: #e4393c;
+      border-color: #e4393c; }
+    .shop-main .fixBar .fl > span {
+      padding-left: 35px;
+      display: inline-block;
+      font-weight: 700; }
+    .shop-main .fixBar .fl .select_all {
+      font-weight: 700;
+      display: inline-block; }
+      .shop-main .fixBar .fl .select_all .total_price {
+        color: red; }
+  .shop-main .fixBar .fr .btn-info {
+    display: block;
+    height: 51px;
+    width: 110px;
+    background: #e4393c;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 50px;
+    margin-top: -1px; }
