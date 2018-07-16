@@ -19,7 +19,7 @@
                 <div class="fl">
                     <a href="">京东自营></a>
                 </div>
-                <div class="fr">满1000-100</div>
+                <div class="fr">您享受满100元免运费服务</div>
             </div>
             <div class="product-list">
                 <div v-for = "(shop , i) in shopListData" class="list-item fix">
@@ -37,9 +37,9 @@
                         <div class="goods_line">
                             <p class = 'price'>{{shop.price | moneyFormat(shop.price)}}</p>
                             <div class="num_and_more">
-                                <span>-</span>
+                                <span @click = "singerShopPrice(shop,false)">-</span>
                                 <input  type="text" v-model = "shop.shopNum" value = 'shop.shopNum' >
-                                <span>+</span>
+                                <span @click = "singerShopPrice(shop,true)">+</span>
                             </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                 <a class ='icon_select ' @click = "selectedAll(isSelectedAll)" :class = "isSelectedAll ? 'selected' :'' "  href="javascript:void(0);"></a>
                 <span >全选</span>
                 <div class="select_all">
-                    合计：<span class="total_price">000.00</span>
+                    合计：<span class="total_price">{{allPrice | moneyFormat(allPrice)}}</span>
                 </div>
             </div>
             <div class="fr">

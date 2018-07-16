@@ -4,6 +4,7 @@ new Vue({
         shopListData:[],
         allPrice:0,
         isSelectedAll:false,
+        isDiscounts:false
     },
     mounted(){
         //获取商品数据
@@ -32,6 +33,8 @@ new Vue({
                     value.checked = !flag;
                 }
             });
+            //计算总价
+            this.getAllShopPrice();
         },
         //选中单个商品
         singerShopSelected(shop){
@@ -43,6 +46,8 @@ new Vue({
 
             //是否全选
             this.hasSelectedAll();
+            //计算总价
+            this.getAllShopPrice();
         },
         //判断是否全部选中
         hasSelectedAll(){
@@ -53,6 +58,33 @@ new Vue({
                 }
             })
             this.isSelectedAll = flag;
+        },
+        //单个商品加减
+        singerShopPrice(shop,flag){
+            if(flag){
+                shop.shopNum += 1;
+            }else{
+                if(shop.shopNum <= 1){
+                    shop.shopNum = 1;
+                    return ;
+                }
+                shop.shopNum -= 1;
+            }
+            shop.checked = true;
+            //是否全选
+            this.hasSelectedAll();
+            //计算总价
+            this.getAllShopPrice();
+        },
+        //计算价格
+        getAllShopPrice(){
+            let allPrice = 0;
+            this.shopListData.forEach((value,index) => {
+                if(value.checked){
+                    allPrice += value.price * value.shopNum;
+                }
+            })
+            this.allPrice = allPrice;
         }
     },
 })
