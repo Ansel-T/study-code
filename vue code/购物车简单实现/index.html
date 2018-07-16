@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/cart.css">
 </head>
 <body>
-<div class="shop-box">
+<div class="shop-box" id = 'app'>
     <div class = 'cart-header'>
         <h2>购物车</h2>
     </div>
@@ -22,20 +22,23 @@
                 <div class="fr">满1000-100</div>
             </div>
             <div class="product-list">
-                <div class="list-item fix">
+                <div v-for = "(shop , i) in shopListData" class="list-item fix">
                     <div class="shop-detile-left fl">
-                        <a class ='icon_select selected'  href="javascript:void(0);"></a>
-                        <img class = 'shop-img' src="css/img/apple_red.jpg" alt="">
+                        <a class ="icon_select" @click = "singerShopSelected(shop)" :class = "shop.checked ? 'selected' : '' "
+                        :checked="shop.checked"
+                        href="javascript:void(0);">
+                        </a>
+                        <img class = 'shop-img' :src="shop.imgUrl" :alt="shop.imgUrl">
                     </div>
                     <div class="shop-detile-right fr">
                         <div class="name">
-                            <span>Apple iPad 平板电脑 2018年新款9.7英寸</span>
+                            <span v-text = "shop.name"></span>
                         </div>
                         <div class="goods_line">
-                            <p class = 'price'>759.00</p>
+                            <p class = 'price'>{{shop.price | moneyFormat(shop.price)}}</p>
                             <div class="num_and_more">
                                 <span>-</span>
-                                <input type="text" value = '1' >
+                                <input  type="text" v-model = "shop.shopNum" value = 'shop.shopNum' >
                                 <span>+</span>
                             </div>
                         </div>
@@ -45,7 +48,7 @@
         </section>
         <div class="fixBar fix">
             <div class="fl">
-                <a class ='icon_select selected'  href="javascript:void(0);"></a>
+                <a class ='icon_select ' @click = "selectedAll(isSelectedAll)" :class = "isSelectedAll ? 'selected' :'' "  href="javascript:void(0);"></a>
                 <span >全选</span>
                 <div class="select_all">
                     合计：<span class="total_price">000.00</span>
