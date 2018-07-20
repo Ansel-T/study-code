@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style >
+        .person-list li,.famous-list li{
+            height: 40px;
+            line-height: 40px;
+            border-right:1px solid #99a9bf;
+            padding: 5px 0;
+            text-align: center;
+        }
+        /* .bg-purple,.bg-purple-light{
+            width: 600px;
+        } */
+        /* .bg-purple{
+            float:left;
+        }
+        .bg-purple-light{
+            float: right;
+        } */
+        .famous-list li{
+            border-right:none;
+        }
+        .bg-purple-light{
+            background:#e5e9f2
+        }
+        .bg-purple-dark {
+            background: #d3dce6;
+        }
+        .famous-tag-list{
+            min-height: 45px;
+            padding: 10px;
+            border: 2px solid green;
+            border-radius: 10px;
+        }
+        .famous-move{
+            display:inline-block;
+            padding: 10px 20px ;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            color: #ccc;
+            font-size: 14px;
+            margin: 5px;
+        }
+        .famous-list .famous-move{
+                padding: 0 20px;
+                border-color:green;
+                color:#232323;
+                margin:0 5px;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    <div>
+        <h2>拖拽题</h2>
+    </div>
+    <div class = "famous-tag-list"  @dragover="dragoverEvent" @drop="dorpEvent($event)">
+        <a class = 'famous-move' v-for = "(tag,index) in famousInitList"
+        :key = "tag.id"
+        draggable="true"
+        @dragstart="dragstartEvent(index,$event)"
+        @dragover="famousDragoverEvent"
+        >{{tag}}
+        </a>
+    </div>
+
+    <div>
+        <div class="grid-content bg-purple">
+            <ul class= "person-list">
+                <li :class= " index % 2 == 0 ? 'bg-purple-dark' :'bg-purple-light '" v-for = "(person,index) in option" :key = "person.id">{{person}}</li>
+            </ul>
+        </div>
+        <div class="grid-content bg-purple-light">
+            <ul class = "famous-list">
+                <li :class= " index % 2 == 0 ? 'bg-purple-dark' :'bg-purple-light '"
+                v-for = "(person,index) in option"
+                @drop="dorpEvent($event)"
+                @dragover = "dragoverEvent"
+                :index = "index"
+                :key = "person.id"></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script src="js/vue.js"></script>
+<script>
+
+    new Vue({
+        el:'#app',
+        data:{
+            currentDom:null,
+            currentParentDom:null,
+            option:['123','456','789'],
+            famousInitList:['->123','->456','->789'],
+            famousTagList:[],
+        },
+        watch:{
+            "question":"copyFamousInfo",
+        },
+        created() {
+            this.copyFamousInfo();
+        },
+        methods:{
+            copyFamousInfo(){
+                // if(this.famousInitList[0] == undefined ){
+                //     this.question.staticOption.forEach((v,i) => {
+                //         this.famousInitList[i] = v;
+                //         this.famousTagList[i] = '';
+                //     })
+                // }
+                if(this.famousTagList[0] == undefined){
+                    this.famousInitList.forEach((v,i) => {
+                        this.famousTagList[i] = '';
+                    })
+                }
+            },
+            nextQues(){
+                this.$emit("next")
+            },
+            showAnswer(){
+                this.isAnswerVisible = true;
+            },
+            dragstartEvent(index,ev) {
+                this.currentDom = ev.currentTarget;
+                this.currentParentDom = ev.target.parentElement;
+                let curParentIndex = ev.target.parentElement.getAttribute('index');
+                ev.dataTransfer.effectAllowed = 'all';
+                let info = {
+                    "index":index,
+                    "curParentIndex":curParentIndex
+                }
+                ev.dataTransfer.setData('info',JSON.stringify(info));
+            },
+            dorpEvent(ev) {
+                ev.preventDefault();
+                let indexInfo = JSON.parse(ev.dataTransfer.getData('info'))
+                let indexData = {
+                    //被拖动元素的索引
+                    currentIndex:indexInfo.index,
+                    //目标元素父元素的索引
+                    targetIndex:ev.target.getAttribute('index'),
+                    //被拖动元素父元素的索引
+                    curParentIndex:indexInfo.curParentIndex
+                }
+                if(this.currentParentDom == ev.target) return
+                if(ev.target.className != 'famous-tag-list'){
+                    this.exchangeTargetDom(ev,indexData);
+                }
+                ev.target.appendChild(this.currentDom);
+                //做题数据维护
+                this.manageFamousTagListArr(ev,indexData);
+                console.log(this.famousInitList)
+                console.log(this.famousTagList)
+
+            },
+            famousDragoverEvent(ev){
+                //禁用拖动源被拖拽进元素
+                ev.dataTransfer.dropEffect = 'none';
+            },
+            //目标对象允许被拖拽元素拖拽进来
+            dragoverEvent(ev) {
+                ev.preventDefault();
+            },
+            //元素互换
+            exchangeTargetDom(ev,indexData){
+                var oldDom = ev.target.firstChild;
+                if(ev.target.firstChild){
+                    if(this.currentParentDom.className == 'famous-tag-list'){
+                        this.currentParentDom.appendChild(oldDom)
+                    }else{
+                        ev.target.parentElement.childNodes[indexData.curParentIndex].appendChild(oldDom);
+                    }
+                }
+            },
+            //做题数据维护
+            manageFamousTagListArr(ev,indexData){
+                if(ev.target.className != 'famous-tag-list'){
+                    if(this.famousTagList.length == 0){
+                        this.famousTagList[indexData.targetIndex] = this.famousInitList[indexData.currentIndex];
+                        return;
+                    }
+                    if(this.famousTagList.indexOf(this.famousInitList[indexData.currentIndex])>-1 ){
+                        let tmp = this.famousTagList[indexData.targetIndex];
+                        this.famousTagList[indexData.targetIndex] = this.famousInitList[indexData.currentIndex];
+                        this.famousTagList[indexData.curParentIndex] = tmp;
+                    }else{
+                        this.famousTagList[indexData.targetIndex] = this.famousInitList[indexData.currentIndex];
+                    }
+
+                }else{
+                    this.famousTagList[indexData.curParentIndex] = '';
+                }
+            },
+        },
+    })
+</script>
+</body>
+</html>
