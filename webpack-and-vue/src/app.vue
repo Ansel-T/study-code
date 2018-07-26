@@ -1,7 +1,7 @@
 
 <template>
     <div>
-        <h1>我是首页呀</h1>
+         <router-view ></router-view>
     </div>
 </template>
 
