@@ -8,6 +8,9 @@
 				<span class="title_text ellipsis">点击前往html页面</span>
 			</router-link>
             <h2>javacsript</h2>
+            <router-link to="/study">
+				<span class="title_text ellipsis">查看学习路线</span>
+			</router-link>
         </div>
         <footer-list></footer-list>
     </div>

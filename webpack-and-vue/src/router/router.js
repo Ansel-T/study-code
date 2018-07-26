@@ -29,6 +29,10 @@ export default new Router ({
                     path: '/html',
                     component:resolve => require(["../page/html/html"], resolve)
                 },
+                {
+                    path: '/study',
+                    component:resolve => require(["../page/javascript/study"], resolve)
+                },
             ]
         }
     ]

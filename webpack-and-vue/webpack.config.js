@@ -68,7 +68,7 @@ var returner = {
             // 处理sass文件的loader配置
             //{ test: /\.scss$/, use: ['style-loader', 'css-loader', 'sass-loader'] },
             // 处理URL路径的loader
-            { test: /\.(jpg|png|gif|bmp|jpeg)$/, use: 'url-loader?limit=43959&name=img/imgs-[hash:7].[ext]' }, // 处理URL路径的loader
+            { test: /\.(jpg|png|gif|bmp|jpeg)$/, use: 'url-loader?limit=10000&name=img/imgs-[hash:7].[ext]' }, // 处理URL路径的loader
             // 最重要的一点：要把node_modules文件夹，添加到排除项，通过exclude排除这个文件夹【注意：一定要排除否则会报错！！！】
             {test:/\.js$/, use:'babel-loader', exclude:/node_modules/},
             {test: /\.vue$/, loader: 'vue-loader'},
