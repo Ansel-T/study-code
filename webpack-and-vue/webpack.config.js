@@ -13,7 +13,20 @@ var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 var { VueLoaderPlugin } = require('vue-loader');
 
-var env = process.env.NODE_ENV
+var env = process.env.NODE_ENV;
+var isPro =  env == 'pro';
+
+var minify =  {
+    removeComments: true,
+    removeScriptTypeAttributes: true,
+    removeAttributeQuotes: true,
+    useShortDoctype: true,
+    decodeEntities: true,
+    collapseWhitespace: true,
+    minifyCSS: true,
+    minifyJS: true,
+    minifyURLs: true
+};
 
 var returner = {
     //入口文件
@@ -61,21 +74,11 @@ var returner = {
             {test: /\.vue$/, loader: 'vue-loader'},
         ]
     },
-    devServer: { // 这里的配置项会交给webpack-dev-server去读取
-        contentBase: path.resolve(__dirname, 'src'),
-        open: true,
-        port: 4321,
-        hot: true
-    },
     plugins: [ // 插件数组
         new htmlWebpackPlugin({ // 创建一个htmlWebpackPlugin插件
             template: path.resolve(__dirname, 'index.html'), // 指定模板页面
             filename: 'index.html', // 指定在内存中生成的页面的名称
-            minify:{ // 压缩优化HTML页面
-                collapseWhitespace:true, // 合并空白字符
-                removeComments:true, // 移除注释
-                removeAttributeQuotes:true // 移除属性上的引号
-            }
+            minify: isPro ? minify :{}
         }),
         //vue loader
         new VueLoaderPlugin(),
@@ -115,6 +118,13 @@ if (env == 'pro'){
         new OptimizeCssAssetsPlugin() // 创建一个压缩CSS文件的插件
     )
 
+}else{
+    returner.devServer = { // 这里的配置项会交给webpack-dev-server去读取
+        contentBase: path.resolve(__dirname, 'src'),
+        open: true,
+        port: 4321,
+        hot: true
+    }
 }
 
 module.exports  = returner
