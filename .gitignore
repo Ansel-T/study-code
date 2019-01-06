@@ -1,4 +1,4 @@
-.DS_Store
+﻿.DS_Store
 node_modules/
 dist/
 npm-debug.log
@@ -9,3 +9,4 @@ package-lock.json
 .vscode
 tree.md
 *.idea
+.git
