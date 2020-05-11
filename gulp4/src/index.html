@@ -1,0 +1,27 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta id="i18n_pagename" content="message">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/common.css">
+</head>
+<body>
+    @@include('./layout/nav.tpl',{"selected":"home"})
+    <div class="i18n" data-properties="htmlmsg" data-ptype="html">
+    </div>
+    <select id="language">
+        <option value="zh-CN">中文简体</option>
+        <option value="zh-HK">中文繁体</option>
+    </select>
+<script src="./js/lib/jquery-1.8.3.min.js"></script>
+<script src="./js/lib/jquery.i18n.properties.js"></script>
+<script src="./js/language.js"></script>
+<script src="./js/common.js"></script>
+</script>
+</body>
+</html>
