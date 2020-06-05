@@ -10,6 +10,7 @@
     <!-- <ktree></ktree> -->
 
     <!-- dialog -->
+    <from></from>
     <button @click="dialogHandler">dialog</button>
   </div>
 </template>
@@ -19,8 +20,9 @@
 import Parent from './views/parent'
 import Slots from '@/components/slots'
 import Ktree from '@/components/ktree'
-import Dialog from "@/components/dialog";
-import create from "@/utils/dialog";
+import Dialog from "@/components/dialog"
+import From from "@/components/Kfrom"
+import create from "@/utils/dialog"
 
 export default {
   provide: {
@@ -35,7 +37,8 @@ export default {
   components: {
     Parent,
     Slots,
-    Ktree
+    Ktree,
+    From
   },
   mounted () {
     this.$bus.$on('event-bus', msg => {
@@ -63,8 +66,9 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  // text-align: center;
+  text-align: center;
   color: #2c3e50;
+  padding-top: 200px;
 }
 
 .item{
